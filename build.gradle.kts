@@ -22,6 +22,8 @@ dependencies {
     implementation(libs.bundles.ktor)
     implementation(libs.logback)
 
+    implementation(libs.bundles.langchain)
+
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test)
 }

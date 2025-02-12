@@ -1,5 +1,8 @@
 # mlplayground
 
+Run ollama with docker compose.
+install `ollama run deepseek-r1:1.5b`
+
 This project was created using the [Ktor Project Generator](https://start.ktor.io).
 
 Here are some useful links to get you started:
