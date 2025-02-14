@@ -24,13 +24,13 @@ class ApplicationTest {
         }
         val clientId = kotlin.random.Random.nextInt()
 
-        val response1 = client.post("/chat") {
+        val response1 = client.post("/ai-service/chat") {
             contentType(ContentType.Application.Json)
             setBody(Message(clientId, "I want you to remember that there is a rabbit in the white box"))
         }
         println(response1.bodyAsText())
 
-        val response2 = client.post("/chat") {
+        val response2 = client.post("/ai-service/chat") {
             contentType(ContentType.Application.Json)
             setBody(Message(clientId, "Please remind me what is in the white box"))
         }

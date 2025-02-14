@@ -1,5 +1,5 @@
 ###
-POST  http://localhost:8080/chat
+POST  http://localhost:8080/ai-service/chat
 Content-Type: application/json
 
 {
