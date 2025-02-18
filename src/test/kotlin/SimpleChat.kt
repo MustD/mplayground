@@ -10,7 +10,7 @@ import io.ktor.server.testing.*
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 
-class Examples {
+class SimpleChat {
 
     @Test
     fun aiServiceTest() = testApplication {
@@ -19,7 +19,7 @@ class Examples {
 
         val clientId = kotlin.random.Random.nextInt()
 
-        val response = client.post("/ai-service/chat") {
+        val response = client.post("/service/chat") {
             contentType(ContentType.Application.Json)
             setBody(Message(clientId, "Whats best programming language?"))
         }
@@ -47,13 +47,13 @@ class Examples {
 
         val clientId = kotlin.random.Random.nextInt()
 
-        val response1 = client.post("/ai-service/chat") {
+        val response1 = client.post("/service/chat") {
             contentType(ContentType.Application.Json)
             setBody(Message(clientId, "I want you to remember that there is a rabbit in the white box"))
         }
         println(response1.bodyAsText())
 
-        val response2 = client.post("/ai-service/chat") {
+        val response2 = client.post("/service/chat") {
             contentType(ContentType.Application.Json)
             setBody(Message(clientId, "Please remind me what is in the white box"))
         }
@@ -68,7 +68,7 @@ class Examples {
         val client = createClient { install(ContentNegotiation) { json() } }
         val clientId = kotlin.random.Random.nextInt()
 
-        val response1 = client.post("/ai-service/chat") {
+        val response1 = client.post("/service/chat") {
             contentType(ContentType.Application.Json)
             setBody(Message(clientId, "What is the latest version of Kotlin"))
         }

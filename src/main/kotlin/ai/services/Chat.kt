@@ -13,4 +13,14 @@ interface Chat {
         """
     )
     fun chat(@MemoryId memoryId: Int, @UserMessage request: String): String
+
+
+    @SystemMessage(
+        """
+            You are helpful assistant.
+            You can help the user by providing information from documentation.
+        """
+    )
+    fun documentation(@MemoryId memoryId: Int, @UserMessage request: String): String
+
 }

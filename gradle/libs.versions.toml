@@ -18,6 +18,8 @@ ktor-client-conten-negotiation = { group = "io.ktor", name = "ktor-client-conten
 
 langchain = { group = "dev.langchain4j", name = "langchain4j", version.ref = "langchain4j" }
 langchain-ollama = { group = "dev.langchain4j", name = "langchain4j-ollama", version.ref = "langchain4j" }
+langchain-easy-rag = { group = "dev.langchain4j", name = "langchain4j-easy-rag", version.ref = "langchain4j" }
+
 
 logback = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
 
@@ -31,7 +33,7 @@ ktor = [
     "ktor-client-conten-negotiation"
 ]
 langchain = [
-    "langchain", "langchain-ollama"
+    "langchain", "langchain-ollama", "langchain-easy-rag"
 ]
 
 
