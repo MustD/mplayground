@@ -5,6 +5,7 @@ import com.example.ai.services.Assistant
 import dev.langchain4j.data.message.SystemMessage.systemMessage
 import dev.langchain4j.data.message.UserMessage.userMessage
 import dev.langchain4j.model.chat.chat
+import dev.langchain4j.model.chat.request.DefaultChatRequestParameters
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -27,7 +28,7 @@ fun Route.chat() {
             Llama32.model.chat {
                 messages += systemMessage("You are a helpful assistant. Your answers should be no more than 5 words long.")
                 messages += userMessage(message.message)
-//                parameters(DefaultChatRequestParameters.builder()){ }
+                parameters(DefaultChatRequestParameters.builder()) { }
             }
         }
         call.respondText { answer.await().aiMessage().text() }
