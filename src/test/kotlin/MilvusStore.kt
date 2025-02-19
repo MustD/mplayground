@@ -10,7 +10,7 @@ import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.testing.*
 import kotlin.test.Test
 
-class Milvus {
+class MilvusStore {
 
     @Test
     fun documentInsertTest() = testApplication {

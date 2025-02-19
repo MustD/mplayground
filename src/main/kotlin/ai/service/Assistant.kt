@@ -7,7 +7,7 @@ import dev.langchain4j.service.AiServices
 
 object Assistant {
     val instance: Chat = AiServices.builder(Chat::class.java)
-        .chatLanguageModel(Llama32.model)
+        .chatLanguageModel(Llama32.chatModel)
         .chatMemoryProvider { _ -> MessageWindowChatMemory.withMaxMessages(10) }
         .tools(Information())
         .build()

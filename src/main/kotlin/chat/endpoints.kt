@@ -1,8 +1,10 @@
 package com.example.chat
 
+import com.example.ai.model.NomicEmbedText
 import com.example.ai.models.Llama32
 import com.example.ai.services.Assistant
 import com.example.ai.services.Chat
+import com.example.ai.store.MilvusStore
 import dev.langchain4j.data.document.loader.FileSystemDocumentLoader
 import dev.langchain4j.data.message.SystemMessage.systemMessage
 import dev.langchain4j.data.message.UserMessage.userMessage
@@ -10,13 +12,11 @@ import dev.langchain4j.data.segment.TextSegment
 import dev.langchain4j.memory.chat.MessageWindowChatMemory
 import dev.langchain4j.model.chat.chat
 import dev.langchain4j.model.chat.request.DefaultChatRequestParameters
-import dev.langchain4j.model.ollama.OllamaEmbeddingModel
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever
 import dev.langchain4j.service.AiServices
 import dev.langchain4j.store.embedding.EmbeddingStore
 import dev.langchain4j.store.embedding.EmbeddingStoreIngestor
 import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore
-import dev.langchain4j.store.embedding.milvus.MilvusEmbeddingStore
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -42,7 +42,7 @@ fun Route.chat() {
     post("/low-level/chat") {
         val message = call.receive<Message>()
         val answer = CoroutineScope(Dispatchers.IO).async {
-            Llama32.model.chat {
+            Llama32.chatModel.chat {
                 messages += systemMessage("You are a helpful assistant. Your answers should be no more than 5 words long.")
                 messages += userMessage(message.message)
                 parameters(DefaultChatRequestParameters.builder()) { }
@@ -68,7 +68,7 @@ fun Route.chat() {
         EmbeddingStoreIngestor.ingest(document, store)
 
         val instance: Chat = AiServices.builder(Chat::class.java)
-            .chatLanguageModel(Llama32.model)
+            .chatLanguageModel(Llama32.chatModel)
             .chatMemoryProvider { _ -> MessageWindowChatMemory.withMaxMessages(10) }
             .contentRetriever(EmbeddingStoreContentRetriever.from(store))
             .build()
@@ -80,16 +80,8 @@ fun Route.chat() {
     post("/milvus/insert") {
         val document = call.receive<Document>()
 
-        val embeddingStore: EmbeddingStore<TextSegment> = MilvusEmbeddingStore.builder()
-            .uri("http://127.0.0.1:19530")
-            .collectionName("animals_collection_8")
-            .dimension(768)
-            .build()
-
-        val embeddingModel = OllamaEmbeddingModel.builder()
-            .baseUrl("http://localhost:11434")
-            .modelName("nomic-embed-text:latest")
-            .build()
+        val embeddingStore: EmbeddingStore<TextSegment> = MilvusStore().store
+        val embeddingModel = NomicEmbedText.embeddingModel
 
         val embedding = embeddingModel.embed(document.content).content()
         val result = embeddingStore.add(embedding, TextSegment.from(document.content))
@@ -100,15 +92,8 @@ fun Route.chat() {
     post("/milvus/search") {
         val message = call.receive<Message>()
 
-        val embeddingStore: EmbeddingStore<TextSegment> = MilvusEmbeddingStore.builder()
-            .uri("http://127.0.0.1:19530")
-            .collectionName("animals_collection_8")
-            .build()
-
-        val embeddingModel = OllamaEmbeddingModel.builder()
-            .baseUrl("http://localhost:11434")
-            .modelName("nomic-embed-text:latest")
-            .build()
+        val embeddingStore: EmbeddingStore<TextSegment> = MilvusStore().store
+        val embeddingModel = NomicEmbedText.embeddingModel
 
         val contentRetriever = EmbeddingStoreContentRetriever.builder()
             .embeddingStore(embeddingStore)
@@ -116,7 +101,7 @@ fun Route.chat() {
             .build()
 
         val instance: Chat = AiServices.builder(Chat::class.java)
-            .chatLanguageModel(Llama32.model)
+            .chatLanguageModel(Llama32.chatModel)
             .chatMemoryProvider { _ -> MessageWindowChatMemory.withMaxMessages(10) }
             .contentRetriever(contentRetriever)
             .build()
