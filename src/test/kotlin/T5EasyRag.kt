@@ -27,7 +27,7 @@ class T5EasyRag {
 
         val response = client.post("/easy-rag/search") {
             contentType(ContentType.Application.Json)
-            setBody(Message(clientId, "Who is Zip?"))
+            setBody(Message(clientId, "Who is Dot?"))
         }
 
         val result = response.bodyAsText()

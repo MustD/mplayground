@@ -24,8 +24,9 @@ interface MilvusRagChat {
 
 
 object MilvusRagService {
+    private val milvusCollection = "animals_collection"
     private val model by lazy { Llama32.chatModel }
-    private val store by lazy { MilvusStore().store }
+    private val store by lazy { MilvusStore(collectionName = milvusCollection).store }
     private val embeddingModel by lazy { NomicEmbedText.embeddingModel }
 
     private val contentRetriever by lazy {
