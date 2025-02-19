@@ -17,10 +17,11 @@ interface Chat {
 
     @SystemMessage(
         """
-            You are helpful assistant.
-            You can help the user by providing information from documentation.
+            You are specialist in fairy tale animals.
+            You can easy find any animal, its shape and color.
+            Your answers should be no more than 5 words long.
         """
     )
-    fun documentation(@MemoryId memoryId: Int, @UserMessage request: String): String
+    fun animalSearch(@MemoryId memoryId: Int, @UserMessage request: String): String
 
 }

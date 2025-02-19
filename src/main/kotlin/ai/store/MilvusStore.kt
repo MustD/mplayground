@@ -6,7 +6,7 @@ import dev.langchain4j.store.embedding.milvus.MilvusEmbeddingStore
 
 
 class MilvusStore(
-    private val collectionName: String = "animals_collection_8",
+    private val collectionName: String = "animals_collection",
     private val embeddingDimension: Int = 768,
 ) {
     private val url: String = "http://127.0.0.1:19530"

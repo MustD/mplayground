@@ -8,6 +8,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.testing.*
+import java.io.File
 import kotlin.test.Test
 
 class MilvusStore {
@@ -17,9 +18,11 @@ class MilvusStore {
         application { module() }
         val client = createClient { install(ContentNegotiation) { json() } }
 
+        val content = File("src/main/resources/fairytale.txt").readText()
+
         client.post("milvus/insert") {
             contentType(ContentType.Application.Json)
-            setBody(Document("Squirrel named Squeaky have brown and triangle shape."))
+            setBody(Document(content))
         }
     }
 
@@ -30,7 +33,7 @@ class MilvusStore {
 
         val response = client.post("milvus/search") {
             contentType(ContentType.Application.Json)
-            setBody(Message(1, "What animal is Squeaky, and what shape and color is it?"))
+            setBody(Message(1, "Who is Conrad?"))
         }
         println(response.bodyAsText())
     }

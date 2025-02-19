@@ -20,7 +20,7 @@ class EasyRag {
 
         val response = client.post("/easy-rag/fairytale") {
             contentType(ContentType.Application.Json)
-            setBody(Message(clientId, "Who is Cubey? I need to know shape and color only."))
+            setBody(Message(clientId, "Who is Cubey?"))
         }
         println(response.bodyAsText())
     }

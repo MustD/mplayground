@@ -61,8 +61,7 @@ fun Route.chat() {
     post("/easy-rag/fairytale") {
         val message = call.receive<Message>()
 
-        val document =
-            FileSystemDocumentLoader.loadDocument("/home/md/IdeaProjects/mlplayground/src/main/resources/fairytale.txt")
+        val document = FileSystemDocumentLoader.loadDocument("src/main/resources/fairytale.txt")
         val store = InMemoryEmbeddingStore<TextSegment>()
 
         EmbeddingStoreIngestor.ingest(document, store)
@@ -73,7 +72,7 @@ fun Route.chat() {
             .contentRetriever(EmbeddingStoreContentRetriever.from(store))
             .build()
 
-        val answer = instance.documentation(message.chatId, message.message)
+        val answer = instance.animalSearch(message.chatId, message.message)
         call.respondText { answer }
     }
 
@@ -106,7 +105,7 @@ fun Route.chat() {
             .contentRetriever(contentRetriever)
             .build()
 
-        val answer = instance.documentation(message.chatId, message.message)
+        val answer = instance.animalSearch(message.chatId, message.message)
         call.respondText { answer }
     }
 
