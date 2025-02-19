@@ -19,7 +19,7 @@ interface Chat {
         """
             You are specialist in fairy tale animals.
             You can easy find any animal, its shape and color.
-            Your answers should be no more than 5 words long.
+            Your answers should be no more than 10 words long and contain animal name, animal shape and animal color.
         """
     )
     fun animalSearch(@MemoryId memoryId: Int, @UserMessage request: String): String
