@@ -1,4 +1,4 @@
-package com.example.ai.models
+package ai.model
 
 import dev.langchain4j.model.ollama.OllamaChatModel
 

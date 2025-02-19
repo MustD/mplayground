@@ -1,42 +1,21 @@
 package com.example
 
-import com.example.chat.Message
-import io.ktor.client.plugins.contentnegotiation.*
+import com.example.utils.printAnswer
+import com.example.utils.testApi
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
-import io.ktor.server.testing.*
 import kotlin.test.Test
-import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 class ApplicationTest {
 
     @Test
-    fun testRoot() = testApplication {
-        application {
-            module()
-        }
-        val client = createClient {
-            install(ContentNegotiation) {
-                json()
-            }
-        }
-        val clientId = kotlin.random.Random.nextInt()
+    fun testRoot() = testApi {
 
-        val response1 = client.post("/service/chat") {
-            contentType(ContentType.Application.Json)
-            setBody(Message(clientId, "I want you to remember that there is a rabbit in the white box"))
-        }
-        println(response1.bodyAsText())
+        val response = client.get("/")
 
-        val response2 = client.post("/service/chat") {
-            contentType(ContentType.Application.Json)
-            setBody(Message(clientId, "Please remind me what is in the white box"))
-        }
-
-        println(response2.bodyAsText())
-        assertNotNull(response2.bodyAsText())
+        assertTrue { response.bodyAsText() == "Hello World!" }
+        response.bodyAsText().printAnswer()
     }
 
 }

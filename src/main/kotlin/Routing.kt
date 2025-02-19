@@ -1,6 +1,6 @@
 package com.example
 
-import com.example.chat.chat
+import com.example.chat.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
@@ -13,9 +13,14 @@ fun Application.configureRouting() {
     }
 
     routing {
-        get("/") {
-            call.respondText("Hello World!")
-        }
-        chat()
+        get("/") { call.respondText("Hello World!") }
+
+        simpleChat()
+        serviceChat()
+        historyChat()
+        toolsChat()
+        easyRag()
+        milvusRag()
+
     }
 }

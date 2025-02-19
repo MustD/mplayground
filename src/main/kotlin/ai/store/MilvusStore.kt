@@ -1,4 +1,4 @@
-package com.example.ai.store
+package ai.store
 
 import dev.langchain4j.data.segment.TextSegment
 import dev.langchain4j.store.embedding.EmbeddingStore

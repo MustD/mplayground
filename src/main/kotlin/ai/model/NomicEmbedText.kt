@@ -1,4 +1,4 @@
-package com.example.ai.model
+package ai.model
 
 import dev.langchain4j.model.ollama.OllamaEmbeddingModel
 
