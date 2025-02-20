@@ -8,8 +8,8 @@ object Llama32 {
 
     val chatModel: OllamaChatModel by lazy {
         OllamaChatModel.builder()
-        .baseUrl(BASE_URL)
-        .modelName(MODEL_NAME)
-        .build()
+            .baseUrl(BASE_URL)
+            .modelName(MODEL_NAME)
+            .build()
     }
 }

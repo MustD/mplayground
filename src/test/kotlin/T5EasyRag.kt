@@ -20,6 +20,7 @@ class T5EasyRag {
             this.javaClass.classLoader.getResource("fairytale.txt")?.readText() ?: error("Can't load 'fairytale.txt'")
         }
 
+        //insert every time, as embedding stored in memory
         client.post("/easy-rag/insert") {
             contentType(ContentType.Application.Json)
             setBody(Message(clientId, fairytale))

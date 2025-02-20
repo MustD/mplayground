@@ -21,6 +21,7 @@ fun Application.configureRouting() {
         toolsChat()
         easyRag()
         milvusRag()
+        milvusRagStructured()
 
     }
 }

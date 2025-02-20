@@ -9,7 +9,7 @@ import io.ktor.http.*
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
-class T6MilvusRag {
+class T7MilvusRagStructured {
 
     @Test
     fun `insert content into Milvus`() = testApi {
@@ -19,7 +19,7 @@ class T6MilvusRag {
 
         val clientId = kotlin.random.Random.nextInt()
 
-        val response = client.post("/milvus-rag/insert") {
+        val response = client.post("/milvus-rag-structured/insert") {
             contentType(ContentType.Application.Json)
             setBody(Message(clientId, fairytale))
         }
@@ -27,12 +27,12 @@ class T6MilvusRag {
     }
 
     @Test
-    fun `milvus rag`() = testApi {
+    fun `milvus rag structured`() = testApi {
         val clientId = kotlin.random.Random.nextInt()
 
-        val response = client.post("/milvus-rag/search") {
+        val response = client.post("/milvus-rag-structured/search") {
             contentType(ContentType.Application.Json)
-            setBody(Message(clientId, "Who is Zip?"))
+            setBody(Message(clientId, "Who is Prism?"))
         }
 
         val result = response.bodyAsText()
