@@ -67,12 +67,15 @@ Includes multiple RAG implementations:
 
 ## Technologies Used
 
-- Kotlin
-- Langchain4j
-- Ktor
-- Milvus Vector Database
-- Nomic Embeddings
-- Llama Model Integration
+- Kotlin 2.1.10
+- Ktor 3.0.3
+- Langchain4j 1.0.0-beta1
+- Milvus Vector Database (via langchain4j-milvus)
+- Logback 1.4.14
+- Additional Langchain4j integrations:
+    - Ollama
+    - Easy RAG
+    - Google AI Gemini
 
 ## Project Structure
 
