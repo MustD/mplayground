@@ -22,6 +22,7 @@ fun Application.configureRouting() {
         easyRag()
         milvusRag()
         milvusRagStructured()
+        voiceRecognizer()
 
     }
 }

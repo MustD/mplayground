@@ -20,6 +20,7 @@ langchain = { group = "dev.langchain4j", name = "langchain4j", version.ref = "la
 langchain-ollama = { group = "dev.langchain4j", name = "langchain4j-ollama", version.ref = "langchain4j" }
 langchain-easy-rag = { group = "dev.langchain4j", name = "langchain4j-easy-rag", version.ref = "langchain4j" }
 langchain-milvus = { group = "dev.langchain4j", name = "langchain4j-milvus", version.ref = "langchain4j" }
+langchain-gemini = { group = "dev.langchain4j", name = "langchain4j-google-ai-gemini", version.ref = "langchain4j" }
 
 
 
@@ -35,7 +36,7 @@ ktor = [
     "ktor-client-conten-negotiation"
 ]
 langchain = [
-    "langchain", "langchain-ollama", "langchain-easy-rag", "langchain-milvus"
+    "langchain", "langchain-ollama", "langchain-easy-rag", "langchain-milvus", "langchain-gemini"
 ]
 
 

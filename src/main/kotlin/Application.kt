@@ -1,6 +1,7 @@
 package com.example
 
 import io.ktor.server.application.*
+import io.ktor.server.config.*
 
 fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)
@@ -9,4 +10,9 @@ fun main(args: Array<String>) {
 fun Application.module() {
     configureSockets()
     configureRouting()
+}
+
+object Config {
+    private val config by lazy { ApplicationConfig(null) }
+    val geminiApiKey by lazy { runCatching { config.property("geminiApiKey").getString() }.getOrDefault("") }
 }
