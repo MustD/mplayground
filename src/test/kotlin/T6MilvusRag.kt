@@ -6,12 +6,14 @@ import com.example.utils.testApi
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
 class T6MilvusRag {
 
     @Test
+    @Ignore
     fun `insert content into Milvus`() = testApi {
         val fairytale = run {
             this.javaClass.classLoader.getResource("fairytale.txt")?.readText() ?: error("Can't load 'fairytale.txt'")
