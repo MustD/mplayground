@@ -29,7 +29,7 @@ class T3HistoryService {
             result.printAnswer()
         }
 
-        with(makeRequest("What is inside the white box? What color is it?")) {
+        with(makeRequest("What is inside the white box? What color is the animal?")) {
             val result = bodyAsText()
             assertTrue { result.isNotEmpty() }
             result.printAnswer()

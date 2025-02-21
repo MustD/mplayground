@@ -12,7 +12,11 @@ import dev.langchain4j.service.UserMessage
 interface ToolsChat {
     @SystemMessage(
         """
-        You are a helpful assistant. Your answers should be no more than 5 words long.
+            You have only one tool: Get color of given animal. No other tools should be used.
+            
+            You have a red box and it may be used to store animals. 
+            Only one animal can be in the box at the same time.
+            Answer should be simple and short.
         """
     )
     fun chat(@MemoryId memoryId: Int, @UserMessage message: String): String

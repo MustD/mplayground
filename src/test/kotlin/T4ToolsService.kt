@@ -23,13 +23,13 @@ class T4ToolsService {
 
         val animal = listOf("Elephant", "Lion", "Cat", "Dog", "Rabbit").random()
 
-        with(makeRequest("Lets assume we have not empty white box. Remember that there is a $animal in white box")) {
+        with(makeRequest("Put the $animal in red box")) {
             val result = bodyAsText()
             assertTrue { result.isNotEmpty() }
             result.printAnswer()
         }
 
-        with(makeRequest("What is inside the white box? What color is it?")) {
+        with(makeRequest("What animal inside the red box? What color is the animal?")) {
             val result = bodyAsText()
             assertTrue { result.isNotEmpty() }
             result.printAnswer()
