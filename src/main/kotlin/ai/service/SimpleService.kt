@@ -20,6 +20,7 @@ object SimpleService {
     val instance: SimpleChat by lazy {
         AiServices.builder(SimpleChat::class.java)
             .chatLanguageModel(model)
+//            .moderationModel()
             .build()
     }
 }
